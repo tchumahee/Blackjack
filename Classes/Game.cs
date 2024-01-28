@@ -101,7 +101,7 @@ namespace Blackjack.Classes
                             return false;
                         }
                     }
-                    throw new Exception();
+                    return false;
                 }
                 throw new Exception();
             }
