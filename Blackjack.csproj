@@ -65,7 +65,9 @@
     </Compile>
     <Compile Include="Classes\CardDeck.cs" />
     <Compile Include="Classes\Dealer.cs" />
+    <Compile Include="Classes\Exceptions\StayNotSelectedException.cs" />
     <Compile Include="Classes\Game.cs" />
+    <Compile Include="Classes\Hand.cs" />
     <Compile Include="Classes\HelperClasses\Rank.cs" />
     <Compile Include="Classes\HelperClasses\Suit.cs" />
     <Compile Include="Classes\Player.cs" />
