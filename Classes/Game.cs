@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Blackjack.Classes.Exceptions;
 
 namespace Blackjack.Classes
 {
@@ -24,11 +25,18 @@ namespace Blackjack.Classes
 
         public int BetAmount { get => betAmount; }
         public int DealerHandScore { get => dealerHand.CardScore; }
+        public int MoneyScore { get => moneyScore; }
 
         public Game(int numDecks, int moneyScore)
         {
-            cardDeck = new CardDeck(numDecks);
+            ShuffleDeck(numDecks);
             this.moneyScore = moneyScore;
+        }
+
+        public void ShuffleDeck(int numDecks)           // to use if deck is empty during game 
+        {
+            cardDeck = new CardDeck(numDecks);
+            cardDeck.Shuffle();
         }
 
         public bool StartGame()     // draws 2 hands, readies first card and sets game state to started
@@ -49,21 +57,39 @@ namespace Blackjack.Classes
                 return false;
         }
 
+        private void endRound()
+        {
+            gameStarted = false;
+            stayChosen = false;
+
+            dealerHand.ClearHand();
+            playerHand.ClearHand();
+        }
+
+        public void RoundWin()
+        {
+            moneyScore += betAmount * 2;
+            endRound();
+        }
+
+        public void RoundLose()
+        {
+            endRound();
+        }
+
         public void PlaceBet(int betAmount)
         {
             this.betAmount = betAmount;
+            moneyScore -= betAmount;
         }
 
         public void Hit()
         {
             if (gameStarted)
             {
-                if (playerHand.CardScore < 21)
-                {
-                    if(nextCard != null)
-                        playerHand.AddPlayingCard(nextCard);
-                    nextCard = cardDeck.DrawCard();
-                }
+                if (nextCard != null)
+                    playerHand.AddPlayingCard(nextCard);
+                nextCard = cardDeck.DrawCard();
             }
         }
 
@@ -80,33 +106,29 @@ namespace Blackjack.Classes
         {
             if (stayChosen)
             {
-                if (playerHand.CardScore < 21)
+                if (nextCard != null)
                 {
-                    if (nextCard != null)
+                    if (dealerHand.CardScore <= 15)
                     {
-                        if (dealerHand.CardScore <= 15)
-                        {
-                            dealerHand.AddPlayingCard(nextCard);
-                            nextCard = cardDeck.DrawCard();
-                            return true;
-                        }
-                        else if (dealerHand.CardScore <= 17)
-                        {
-                            // draws with some chance
-                            return false;               // until implemented, doesn't draw
-                        }
-                        else
-                        {
-                            // very small chance of drawing
-                            return false;
-                        }
+                        dealerHand.AddPlayingCard(nextCard);
+                        nextCard = cardDeck.DrawCard();
+                        return true;
                     }
-                    return false;
+                    else if (dealerHand.CardScore <= 17)
+                    {
+                        // draws with some chance
+                        return false;               // until implemented, doesn't draw
+                    }
+                    else
+                    {
+                        // very small chance of drawing
+                        return false;
+                    }
                 }
-                throw new Exception();
+                return false;
             }
             else
-                throw new Exception();
+                throw new StayNotSelectedException();
         }
     }
 }
