@@ -84,7 +84,7 @@ namespace Blackjack.Classes
                 {
                     if (nextCard != null)
                     {
-                        if(dealerHand.CardScore <= 15)
+                        if (dealerHand.CardScore <= 15)
                         {
                             dealerHand.AddPlayingCard(nextCard);
                             nextCard = cardDeck.DrawCard();
@@ -101,8 +101,12 @@ namespace Blackjack.Classes
                             return false;
                         }
                     }
+                    throw new Exception();
                 }
+                throw new Exception();
             }
+            else
+                throw new Exception();
         }
     }
 }
