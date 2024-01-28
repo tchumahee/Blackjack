@@ -1,0 +1,15 @@
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\bin\Debug\Blackjack.exe.config
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\bin\Debug\Blackjack.exe
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\bin\Debug\Blackjack.pdb
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack.csproj.AssemblyReference.cache
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\MainWindow.g.cs
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\App.g.cs
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack_MarkupCompile.cache
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack_MarkupCompile.lref
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\MainWindow.baml
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack.g.resources
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack.Properties.Resources.resources
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack.csproj.GenerateResource.cache
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack.csproj.CoreCompileInputs.cache
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack.exe
+D:\Skladiste\Fakultet\4. godina\1. semestar\Interakcija covjek - racunar\Projekat B\Blackjack\obj\Debug\Blackjack.pdb
