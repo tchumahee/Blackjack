@@ -9,17 +9,17 @@ namespace Blackjack.Classes
 {
     class CardDeck
     {
-        private PlayingCard[] playingCards;
+        private Card[] playingCards;
         private int index = 0;
         private int cardsLeft;
 
-        public PlayingCard[] PlayingCards { get => playingCards; }
+        public Card[] PlayingCards { get => playingCards; }
         public int CardsLeft { get => cardsLeft; }
 
         public CardDeck(int numPacks)           // Constructor taking the number of card packs used as an argument
         {
             cardsLeft = numPacks * 52;
-            playingCards = new PlayingCard[cardsLeft];
+            playingCards = new Card[cardsLeft];
             int i = 0;
 
             for(int pack = 1; pack <= numPacks; pack++)
@@ -28,14 +28,14 @@ namespace Blackjack.Classes
                 {
                     foreach (Suit suit in Enum.GetValues(typeof(Suit)))
                     {
-                        playingCards[i] = new PlayingCard(rank, suit);
+                        playingCards[i] = new Card(rank, suit);
                         i++;
                     }
                 }
             }
         }
 
-        public PlayingCard DrawCard()
+        public Card DrawCard()
         {
             if (index < cardsLeft)
             {
@@ -57,12 +57,12 @@ namespace Blackjack.Classes
         public override bool Equals(object obj)
         {
             return obj is CardDeck deck &&
-                   EqualityComparer<PlayingCard[]>.Default.Equals(playingCards, deck.playingCards);
+                   EqualityComparer<Card[]>.Default.Equals(playingCards, deck.playingCards);
         }
 
         public override int GetHashCode()
         {
-            return -308505388 + EqualityComparer<PlayingCard[]>.Default.GetHashCode(playingCards);
+            return -308505388 + EqualityComparer<Card[]>.Default.GetHashCode(playingCards);
         }
     }
 }

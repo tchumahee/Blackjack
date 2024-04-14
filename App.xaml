@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:Blackjack"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="PlayingCard" TargetType="Rectangle">
+            <Setter Property="Height" Value="88"></Setter>
+            <Setter Property="Width" Value="63"></Setter>
+            <Setter Property="Fill" Value="Beige"></Setter>
+            <Setter Property="Stroke" Value="Black"></Setter>
+            <Setter Property="RadiusX" Value="3"></Setter>
+            <Setter Property="RadiusY" Value="3"></Setter>
+        </Style> 
+        
+        
+        
     </Application.Resources>
 </Application>

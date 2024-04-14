@@ -7,13 +7,13 @@ using Blackjack.Classes.HelperClasses;
 
 namespace Blackjack.Classes
 {
-    class PlayingCard
+    class Card
     {
         private Rank rank;
         private Suit suit { get; set; }
         private int value;
 
-        public PlayingCard(Rank rank, Suit suit)
+        public Card(Rank rank, Suit suit)
         {
             Rank = rank;
             this.suit = suit;
@@ -39,7 +39,7 @@ namespace Blackjack.Classes
 
         public override bool Equals(object obj)
         {
-            return obj is PlayingCard card &&
+            return obj is Card card &&
                    rank == card.rank &&
                    suit == card.suit;
         }

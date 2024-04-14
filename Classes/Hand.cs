@@ -9,13 +9,13 @@ namespace Blackjack.Classes
 {
     class Hand
     {
-        private List<PlayingCard> playingCards = new List<PlayingCard>();
+        private List<Card> playingCards = new List<Card>();
         private int cardScore;
 
-        public List<PlayingCard> PlayingCards { get => playingCards; }
+        public List<Card> PlayingCards { get => playingCards; }
         public int CardScore { get => cardScore; }
 
-        public bool AddPlayingCard(PlayingCard card)
+        public bool AddPlayingCard(Card card)
         {
             if (cardScore <= 21)
             {

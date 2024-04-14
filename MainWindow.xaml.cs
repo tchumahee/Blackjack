@@ -26,10 +26,10 @@ namespace Blackjack
             InitializeComponent();
 
 
-            String test = "";
+            String test = "Gamers";
 
             CardDeck cardDeck = new CardDeck(2);
-            foreach (PlayingCard playingCard in cardDeck.PlayingCards)
+            foreach (Card playingCard in cardDeck.PlayingCards)
                 Console.WriteLine(playingCard);
 
             Console.WriteLine("-------------------------------------------------------------------------------------------------");
@@ -38,7 +38,7 @@ namespace Blackjack
 
             cardDeck.Shuffle();
 
-            foreach (PlayingCard playingCard in cardDeck.PlayingCards)
+            foreach (Card playingCard in cardDeck.PlayingCards)
                 Console.WriteLine(playingCard);
 
             tbTest.Content = test;
