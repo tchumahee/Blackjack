@@ -13,7 +13,7 @@
                 <AccessText TextWrapping="Wrap"/>
             </Label.Content>
         </Label>
-        <Rectangle Style="{StaticResource PlayingCard}" Margin="53,228,676,103"></Rectangle>
+        <Rectangle x:Name="card1" Style="{StaticResource PlayingCard}" Margin="53,228,676,103"></Rectangle>
         <Rectangle Style="{StaticResource PlayingCard}" Margin="137,228,592,103"></Rectangle>
     </Canvas>
 </Window>
