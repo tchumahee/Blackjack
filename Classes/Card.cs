@@ -10,7 +10,7 @@ namespace Blackjack.Classes
     class Card
     {
         private Rank rank;
-        private Suit suit { get; set; }
+        private Suit suit;
         private int value;
 
         public Card(Rank rank, Suit suit)
@@ -29,6 +29,15 @@ namespace Blackjack.Classes
                 this.value = (int)value <= 10 ? (int)value : 10;
 
                 rank = value;
+            }
+        }
+
+        public Suit Suit
+        {
+            get => suit;
+            set
+            {
+                suit = value;
             }
         }
 

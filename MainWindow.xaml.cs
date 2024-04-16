@@ -26,7 +26,6 @@ namespace Blackjack
             InitializeComponent();
 
 
-            String test = "Gamers";
 
             CardDeck cardDeck = new CardDeck(2);
             foreach (Card playingCard in cardDeck.PlayingCards)
@@ -38,10 +37,16 @@ namespace Blackjack
 
             cardDeck.Shuffle();
 
-            foreach (Card playingCard in cardDeck.PlayingCards)
-                Console.WriteLine(playingCard);
+            //foreach (Card playingCard in cardDeck.PlayingCards)
+            //    Console.WriteLine(playingCard);
 
-            tbTest.Content = test;
+
+            Card card = new Card(Classes.HelperClasses.Rank.Ace, Classes.HelperClasses.Suit.Clubs);
+            card1.Fill = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/Cards/" + card.Rank + "_of_" + card.Suit + ".png"))
+            };
+                
         }
     }
 }

@@ -18,6 +18,14 @@
             </Setter>
         </Style>
 
+        <Style x:Key="PlayingCardBack" TargetType="Rectangle" BasedOn="{StaticResource PlayingCard}">
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <ImageBrush ImageSource="Assets/Images/CardBack.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="PlayArea" TargetType="Rectangle">
             <Setter Property="RadiusX" Value="20"></Setter>
             <Setter Property="RadiusY" Value="20"></Setter>
@@ -60,6 +68,16 @@
                     </Setter.Value>
                 </Setter>
             </Style.Setters>
+        </Style>
+
+        <Style x:Key="GameText" TargetType="Label">
+            <Setter Property="FontFamily" Value="Calibri"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="White"></SolidColorBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>
