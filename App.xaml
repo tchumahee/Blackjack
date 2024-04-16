@@ -5,17 +5,35 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="PlayingCard" TargetType="Rectangle">
-            <Setter Property="Height" Value="88"></Setter>
-            <Setter Property="Width" Value="63"></Setter>
+            <Setter Property="Height" Value="176"></Setter>
+            <Setter Property="Width" Value="126"></Setter>
             <!--<Setter Property="Fill" Value="Beige"></Setter>-->
             <Setter Property="Stroke" Value="Black"></Setter>
             <Setter Property="RadiusX" Value="3"></Setter>
             <Setter Property="RadiusY" Value="3"></Setter>
             <Setter Property="Fill">
                 <Setter.Value>
-                    <ImageBrush ImageSource="Assets/Images/CardBack.png"/>
+                    <ImageBrush ImageSource="Assets/Images/Cards/Seven_of_Hearts.png"/>
                 </Setter.Value>
             </Setter>
-        </Style> 
+        </Style>
+
+        <Style x:Key="PlayArea" TargetType="Rectangle">
+            <Setter Property="RadiusX" Value="20"></Setter>
+            <Setter Property="RadiusY" Value="20"></Setter>
+            <Setter Property="Fill" Value="Lavender"></Setter>
+            <Setter Property="Stroke" Value="Purple"></Setter>
+        </Style>
+
+        <Style x:Key="PanelButton" TargetType="Button">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontFamily" Value="Calibri"></Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="White"></SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#4d4263"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

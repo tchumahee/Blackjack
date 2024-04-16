@@ -5,15 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blackjack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="580.5" Width="1005.5">
 
-    <Canvas HorizontalAlignment="Left" Height="430" Margin="0,10,0,-21" VerticalAlignment="Top" Width="790">
+    <Canvas Margin="0,0,-7,-21">
+        <Canvas.Background>
+            <SolidColorBrush Color="#4d4263"></SolidColorBrush>
+            <!--<ImageBrush ImageSource="Assets/Images/TableTexture2.png"></ImageBrush>-->
+        </Canvas.Background>
+
         <Label x:Name="tbTest" HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="624" Canvas.Left="79" Canvas.Top="25">
             <Label.Content>
                 <AccessText TextWrapping="Wrap"/>
             </Label.Content>
         </Label>
-        <Rectangle x:Name="card1" Style="{StaticResource PlayingCard}" Margin="53,228,676,103"></Rectangle>
-        <Rectangle Style="{StaticResource PlayingCard}" Margin="137,228,592,103"></Rectangle>
+        <Rectangle Height="298" Canvas.Left="41" Canvas.Top="226" Width="917" Style="{StaticResource PlayArea}" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.095"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.748"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="card1" Style="{StaticResource PlayingCard}" Canvas.Left="102" Canvas.Top="272"/>
+        <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="140" Canvas.Top="286" RenderTransformOrigin="1.833,0.693"/>
+        <Button Content="Button" Height="40" Canvas.Left="718" Canvas.Top="300" Width="186" Style="{StaticResource PanelButton}"/>
+        <Button Content="Button" Height="40" Canvas.Left="718" Canvas.Top="362" Width="186" Style="{StaticResource PanelButton}"/>
+        <Button Content="Button" Height="40" Canvas.Left="718" Canvas.Top="422" Width="186" Style="{StaticResource PanelButton}"/>
     </Canvas>
 </Window>
