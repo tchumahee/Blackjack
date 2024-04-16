@@ -24,9 +24,9 @@
         </Rectangle>
         <Rectangle x:Name="card1" Style="{StaticResource PlayingCard}" Canvas.Left="102" Canvas.Top="272"/>
         <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="140" Canvas.Top="286" RenderTransformOrigin="1.833,0.693"/>
-        <Button Content="Hit [E]" Height="40" Canvas.Left="718" Canvas.Top="331" Width="186" Style="{StaticResource PanelButton}"/>
-        <Button Content="Stay [S]" Height="40" Canvas.Left="718" Canvas.Top="393" Width="186" Style="{StaticResource PanelButton}"/>
-        <Button Content="Submit score" Height="40" Canvas.Left="718" Canvas.Top="453" Width="186" Style="{StaticResource PanelButton}"/>
+        <Button x:Name="btn1" Content="Hit [E]" Height="40" Canvas.Left="718" Canvas.Top="331" Width="186" Style="{StaticResource PanelButton}"/>
+        <Button x:Name="btn2" Content="Stay [S]" Height="40" Canvas.Left="718" Canvas.Top="393" Width="186" Style="{StaticResource PanelButton}"/>
+        <Button x:Name="btn3" Content="Submit score" Height="40" Canvas.Left="718" Canvas.Top="453" Width="186" Style="{StaticResource PanelButton}"/>
         <Label Content="Dealer" Height="38" Canvas.Left="333" Canvas.Top="33" Width="78" Style="{StaticResource GameText}"/>
         <Rectangle x:Name="card1_Copy" Style="{StaticResource PlayingCardBack}" Canvas.Left="416" Canvas.Top="31" Height="111" Width="80"/>
         <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="440" Canvas.Top="39" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
