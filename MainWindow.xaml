@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blackjack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="580.5" Width="1005.5">
+        Title="Blackjack" Height="580.5" Width="1005.5">
 
     <Canvas Margin="0,0,-7,-21">
         <Canvas.Background>
@@ -30,8 +30,8 @@
         </Rectangle>
         <Rectangle x:Name="card1" Style="{StaticResource PlayingCard}" Canvas.Left="102" Canvas.Top="272"/>
         <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="140" Canvas.Top="286" RenderTransformOrigin="1.833,0.693"/>
-        <Button Content="Button" Height="40" Canvas.Left="718" Canvas.Top="300" Width="186" Style="{StaticResource PanelButton}"/>
-        <Button Content="Button" Height="40" Canvas.Left="718" Canvas.Top="362" Width="186" Style="{StaticResource PanelButton}"/>
+        <Button Content="Hit [E]" Height="40" Canvas.Left="718" Canvas.Top="300" Width="186" Style="{StaticResource PanelButton}"/>
+        <Button Content="Stay [S]" Height="40" Canvas.Left="718" Canvas.Top="362" Width="186" Style="{StaticResource PanelButton}"/>
         <Button Content="Button" Height="40" Canvas.Left="718" Canvas.Top="422" Width="186" Style="{StaticResource PanelButton}"/>
     </Canvas>
 </Window>
