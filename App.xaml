@@ -73,12 +73,17 @@
 
         <Style x:Key="GameText" TargetType="Label">
             <Setter Property="FontFamily" Value="Calibri"></Setter>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="Foreground">
                 <Setter.Value>
                     <SolidColorBrush Color="White"></SolidColorBrush>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style x:Key="GameTextVar" TargetType="Label" BasedOn="{StaticResource GameText}">
+            <Setter Property="FontWeight" Value="Normal"/>
         </Style>
     </Application.Resources>
 </Application>
