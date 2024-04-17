@@ -13,8 +13,8 @@ namespace Blackjack.Classes
         private int betAmount;
 
         private CardDeck cardDeck;
-        private Hand dealerHand;
-        private Hand playerHand;
+        private Hand dealerHand = new Hand();
+        private Hand playerHand = new Hand();
 
         private Card nextCard;           // one readily drawn card to check for null (so that visual can be updated)
         private bool gameStarted = false;
@@ -28,6 +28,9 @@ namespace Blackjack.Classes
         public int BetAmount { get => betAmount; }
         public int DealerHandScore { get => dealerHand.CardScore; }
         public int MoneyScore { get => moneyScore; }
+
+        public Hand DealerHand { get => dealerHand; }
+        public Hand PlayerHand { get => playerHand; }
 
 
 
