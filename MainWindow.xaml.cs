@@ -21,6 +21,69 @@ namespace Blackjack
     /// </summary>
     public partial class MainWindow : Window
     {
+        const int numDecks = 1;
+        const int startingScore = 100;
+        const int startingBet = 5;
+
+        private void raiseBetButtonClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Raise bet clicked.");
+        }
+
+        private void lowerBetButtonClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Lower bet clicked.");
+        }
+
+        private void confirmBetButtonClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Confirm bet clicked.");
+        }
+
+        private void HitButtonClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Hit clicked.");
+        }
+
+        private void StayButtonClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Stay clicked.");
+        }
+
+        private void SaveScoreButtonClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Save score clicked.");
+        }
+
+        private void addButton(string name, string content, RoutedEventHandler btnClick)
+        {
+            Button btn = new Button
+            {
+                Style = (Style)Application.Current.FindResource("PanelButton"),
+                Name = name,
+                Content = content
+            };
+            btn.Click += new RoutedEventHandler(btnClick);
+
+            ButtonsPanel.Children.Add(btn);
+        }
+
+        private void initializeBetButtons()
+        {
+            ButtonsPanel.Children.Clear();
+            addButton("RaiseBetButton", "Raise bet [E]", raiseBetButtonClick);
+            addButton("LowerBetButton", "Lower bet [Q]", lowerBetButtonClick);
+            addButton("ConfirmBetButton", "Deal [W]", confirmBetButtonClick);
+        }
+
+        private void initializeGameButtons()
+        {
+            ButtonsPanel.Children.Clear();
+            addButton("HitButton", "Hit [E]", HitButtonClick);
+            addButton("StayButton", "Stay [S]", StayButtonClick);
+            addButton("SaveButton", "Save score", SaveScoreButtonClick);
+        }
+
         private void addPlayerCard(Card card, int posLeft, int posTop)
         {
             Rectangle rectangle = new Rectangle();
@@ -62,10 +125,10 @@ namespace Blackjack
 
         private void initializeCards(Hand playerHand, Hand dealerHand)
         {
-            int playerHandTop = 30;
-            int playerHandLeft = 26;
-            int dealerHandTop = 1;
-            int dealerHandLeft = 42;
+            int playerHandTop = (int)Canvas.GetTop(PlayerCardRef) - 14;
+            int playerHandLeft = (int)Canvas.GetLeft(PlayerCardRef) - 38;
+            int dealerHandTop = (int)Canvas.GetTop(DealerCardRef) - 8;
+            int dealerHandLeft = (int)Canvas.GetLeft(DealerCardRef) - 24;
 
             foreach (Card card in playerHand.PlayingCards)
             {
@@ -85,31 +148,10 @@ namespace Blackjack
         {
             InitializeComponent();
 
-            const int numDecks = 2;
-            const int startingScore = 100;
-
-            //CardDeck cardDeck = new CardDeck(2);
-            //foreach (Card playingCard in cardDeck.PlayingCards)
-            //    Console.WriteLine(playingCard);
-
-            //Console.WriteLine("-------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("-------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("-------------------------------------------------------------------------------------------------");
-
-            //cardDeck.Shuffle();
-
-            //foreach (Card playingCard in cardDeck.PlayingCards)
-            //    Console.WriteLine(playingCard);
-
-
-            //Card card = new Card(Classes.HelperClasses.Rank.Ace, Classes.HelperClasses.Suit.Clubs);
-            //card1.Fill = new ImageBrush
-            //{
-            //    ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/Cards/" + card.Rank + "_of_" + card.Suit + ".png"))
-            //};
-
 
             BlackJack blackjack = new BlackJack(numDecks, startingScore);
+            ScoreLabel.Content = startingScore;
+            CurrentBetLabel.Content = startingBet;
 
             blackjack.StartGame();
 
@@ -117,6 +159,7 @@ namespace Blackjack
             Hand dealerHand = blackjack.DealerHand;
 
             initializeCards(playerHand, dealerHand);
+            initializeBetButtons();
         }
     }
 }
