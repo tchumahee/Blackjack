@@ -7,33 +7,67 @@
         mc:Ignorable="d"
         Title="Blackjack" Height="580.5" Width="1005.5">
 
-    <Canvas Margin="0,0,-7,-21">
-        <Canvas.Background>
-            <SolidColorBrush Color="#4d4263"></SolidColorBrush>
-            <!--<ImageBrush ImageSource="Assets/Images/TableTexture2.png"></ImageBrush>-->
-        </Canvas.Background>
-        <Rectangle Height="298" Canvas.Left="41" Canvas.Top="226" Width="917" Style="{StaticResource PlayArea}" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.095"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-0.748"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle x:Name="card1" Style="{StaticResource PlayingCard}" Canvas.Left="102" Canvas.Top="272"/>
-        <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="140" Canvas.Top="286" RenderTransformOrigin="1.833,0.693"/>
-        <Button x:Name="btn1" Content="Hit [E]" Height="40" Canvas.Left="718" Canvas.Top="331" Width="186" Style="{StaticResource PanelButton}"/>
-        <Button x:Name="btn2" Content="Stay [S]" Height="40" Canvas.Left="718" Canvas.Top="393" Width="186" Style="{StaticResource PanelButton}"/>
-        <Button x:Name="btn3" Content="Submit score" Height="40" Canvas.Left="718" Canvas.Top="453" Width="186" Style="{StaticResource PanelButton}"/>
-        <Label Content="Dealer" Height="38" Canvas.Left="333" Canvas.Top="33" Width="78" Style="{StaticResource GameText}"/>
-        <Rectangle x:Name="card1_Copy" Style="{StaticResource PlayingCardBack}" Canvas.Left="416" Canvas.Top="31" Height="111" Width="80"/>
-        <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="440" Canvas.Top="39" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
-        <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="84" Canvas.Top="33" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
-        <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="87" Canvas.Top="36" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
-        <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="90" Canvas.Top="39" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
-        <Label Content="Current bet:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="248" Width="186" Style="{StaticResource GameText}"/>
-        <Label Content="Score:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="279" Width="186" Style="{StaticResource GameText}"/>
-    </Canvas>
+    <Grid x:Name="Grid">
+        <Grid.Background>
+            <SolidColorBrush Color="#4d4263"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel x:Name="cell1" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Canvas Height="{Binding ActualHeight, ElementName=cell1}">
+                <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="129" Canvas.Top="47" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
+                <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="132" Canvas.Top="50" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
+                <Rectangle x:Name="DeckTopCard" Style="{StaticResource PlayingCardBack}" Canvas.Left="135" Canvas.Top="53" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel x:Name="row2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Rectangle Height="{Binding ActualHeight, ElementName=row2}" Canvas.Left="41" Canvas.Top="226" Width="{Binding ActualWidth, ElementName=row2}" Style="{StaticResource PlayArea}" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.095"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-0.748"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </StackPanel>
+
+        <StackPanel x:Name="cell4" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Canvas Height="{Binding ActualHeight, ElementName=cell4}">
+                <Rectangle x:Name="card1" Style="{StaticResource PlayingCard}" Canvas.Left="64" Canvas.Top="44"></Rectangle>
+                <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="102" Canvas.Top="58" RenderTransformOrigin="1.833,0.693"/>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel x:Name="cell2" Grid.Row="0" Grid.Column="2">
+            <Label Content="Dealer" Height="38" Canvas.Left="333" Canvas.Top="33" Width="78" Style="{StaticResource GameText}"/>
+            <Canvas Height="200" >
+                <Rectangle x:Name="card1_Copy" Style="{StaticResource PlayingCard}" Canvas.Left="66" Canvas.Top="24" Height="112" Width="80"/>
+                <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="90" Canvas.Top="32" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel x:Name="cell6" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center">
+            <Label Content="Current bet:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="248" Width="186" Style="{StaticResource GameText}"/>
+            <Label Content="Score:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="279" Width="186" Style="{StaticResource GameText}"/>
+            <Button x:Name="btn1" Content="Hit [E]" Height="40" Width="186" Style="{StaticResource PanelButton}"/>
+            <Button x:Name="btn2" Content="Stay [S]" Height="40" Width="186" Style="{StaticResource PanelButton}"/>
+            <Button x:Name="btn3" Content="Submit score" Height="40"  Width="186" Style="{StaticResource PanelButton}"/>
+        </StackPanel>
+    </Grid>
 </Window>
