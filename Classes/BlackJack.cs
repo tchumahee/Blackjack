@@ -25,7 +25,14 @@ namespace Blackjack.Classes
         // hit and stay implemented here
         // dealer logic implemented here
 
-        public int BetAmount { get => betAmount; }
+        public int BetAmount
+        {
+            get => betAmount;
+            set
+            {
+                betAmount = value <= moneyScore ? value : betAmount;
+            }
+        }
         public int DealerHandScore { get => dealerHand.CardScore; }
         public int MoneyScore { get => moneyScore; }
 
@@ -38,6 +45,7 @@ namespace Blackjack.Classes
         {
             ShuffleDeck(numDecks);
             this.moneyScore = moneyScore;
+            this.betAmount = 5;
         }
 
         public void ShuffleDeck(int numDecks)           // to use if deck is empty during game 
@@ -73,19 +81,28 @@ namespace Blackjack.Classes
             playerHand.ClearHand();
         }
 
-        private void DrawCard(HandType handType)
+        private Card DrawCard(HandType handType)
         {
             if (gameStarted)
             {
                 if (nextCard != null)
                 {
                     if (handType == HandType.Player)
-                        playerHand.AddPlayingCard(nextCard);
+                    {
+                        Card addedCard = playerHand.AddPlayingCard(nextCard);
+                        nextCard = cardDeck.DrawCard();
+                        return addedCard;
+                    }
                     else if (handType == HandType.Dealer)
-                        dealerHand.AddPlayingCard(nextCard);
-                    nextCard = cardDeck.DrawCard();
+                    {
+                        Card addedCard = dealerHand.AddPlayingCard(nextCard);
+                        nextCard = cardDeck.DrawCard();
+                        return addedCard;
+                    }
+                    return null;
                 }
             }
+            return null;
         }
 
         public void RoundWin()
@@ -105,9 +122,9 @@ namespace Blackjack.Classes
             moneyScore -= betAmount;
         }
 
-        public void Hit()
+        public Card Hit()
         {
-            DrawCard(HandType.Player);
+            return DrawCard(HandType.Player);
         }
 
         public void Stay()

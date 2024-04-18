@@ -17,6 +17,7 @@ namespace Blackjack.Classes
         {
             Rank = rank;
             this.suit = suit;
+            this.value = ((int)rank) <= 10 ? ((int)rank) : 10;
         }
 
         public int Value { get => value; }
@@ -26,7 +27,7 @@ namespace Blackjack.Classes
             get => rank;
             set
             {
-                this.value = (int)value <= 10 ? (int)value : 10;
+                this.value = ((int)rank) <= 10 ? ((int)rank) : 10;
 
                 rank = value;
             }
@@ -43,7 +44,7 @@ namespace Blackjack.Classes
 
         public override string ToString()
         {
-            return "[ " + rank + ", " + suit + " ]";
+            return "[ " + rank + ", " + suit + ", " + value + " ]";
         }
 
         public override bool Equals(object obj)

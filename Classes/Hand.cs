@@ -15,23 +15,39 @@ namespace Blackjack.Classes
         public List<Card> PlayingCards { get => playingCards; }
         public int CardScore { get => cardScore; }
 
-        public bool AddPlayingCard(Card card)
+        public Card AddPlayingCard(Card card)
         {
-            if (cardScore <= 21)
+            if (cardScore < 21)
             {
                 playingCards.Add(card);
-                if (card.Rank == HelperClasses.Rank.Ace)
+
+                cardScore = 0;
+
+                int numAces = 0;
+                foreach (Card existingCard in playingCards)
                 {
-                    if (cardScore + 11 <= 21)
+                    Console.WriteLine(existingCard);
+                    if(existingCard.Rank == HelperClasses.Rank.Ace)
+                        numAces++;
+                    else
+                        cardScore += existingCard.Value;
+                }
+
+                if(numAces > 0)
+                {
+                    if (cardScore + 11 + (numAces - 1) <= 21)
                     {
-                        cardScore += 11;
-                        return true;
+                        cardScore += 11 + (numAces - 1);
+                    }
+                    else
+                    {
+                        cardScore += numAces;
                     }
                 }
-                cardScore += card.Value;
-                return true;
+                Console.WriteLine("Cards: " + cardScore);
+                return card;
             }
-            else return false;
+            else return null;
         }
 
         public void ClearHand()
