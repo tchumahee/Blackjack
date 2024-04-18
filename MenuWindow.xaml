@@ -1,0 +1,38 @@
+﻿<Window x:Class="Blackjack.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Blackjack"
+        mc:Ignorable="d"
+        Title="Blackjack" Height="580.5" Width="1005.5">
+    <Window.Background>
+        <ImageBrush ImageSource="Assets/Images/MenuBackground.png"/>
+    </Window.Background>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="1" Grid.Row="1" Style="{StaticResource MenuPanel}" Grid.RowSpan="2"/>
+
+        <Label Grid.Row="1" Grid.Column="1" FontSize="50" Content="Blackjack" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontWeight="Bold"
+               FontFamily="Calibri"/>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Button x:Name="NewGameButton" Style="{StaticResource PanelButton}" Content="New game" Click="NewGameButton_Click"/>
+            <Button x:Name="LeaderboardButton" Style="{StaticResource PanelButton}" Content="Leaderboard"/>
+            <Button x:Name="ExitButton" Style="{StaticResource PanelButton}" Content="Exit" Click="ExitButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
