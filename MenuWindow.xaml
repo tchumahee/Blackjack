@@ -31,7 +31,7 @@
 
         <StackPanel Grid.Row="2" Grid.Column="1">
             <Button x:Name="NewGameButton" Style="{StaticResource PanelButton}" Content="New game" Click="NewGameButton_Click"/>
-            <Button x:Name="LeaderboardButton" Style="{StaticResource PanelButton}" Content="Leaderboard"/>
+            <Button x:Name="LeaderboardButton" Style="{StaticResource PanelButton}" Content="Leaderboard" Click="LeaderboardButton_Click"/>
             <Button x:Name="ExitButton" Style="{StaticResource PanelButton}" Content="Exit" Click="ExitButton_Click"/>
         </StackPanel>
     </Grid>

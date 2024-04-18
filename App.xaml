@@ -91,5 +91,11 @@
         <Style x:Key="GameTextVar" TargetType="Label" BasedOn="{StaticResource GameText}">
             <Setter Property="FontWeight" Value="Normal"/>
         </Style>
+
+        <Style x:Key="LeaderboardGrid" TargetType="DataGrid">
+            <Setter Property="Background" Value="#cfb4fa"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
     </Application.Resources>
 </Application>

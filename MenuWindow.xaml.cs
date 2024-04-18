@@ -35,5 +35,12 @@ namespace Blackjack
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeaderboardWindow leaderboardWindow = new LeaderboardWindow();
+            Visibility = Visibility.Hidden;
+            leaderboardWindow.Show();
+        }
     }
 }
