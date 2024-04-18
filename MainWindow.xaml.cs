@@ -45,6 +45,11 @@ namespace Blackjack
         {
             Console.WriteLine("Player won.");
 
+            HiddenDealerCard.Fill = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/Cards/" + blackjack.DealerHand.PlayingCards[0].Rank + "_of_" + blackjack.DealerHand.PlayingCards[0].Suit + ".png"))
+            };
+
             blackjack.RoundWin();
             ScoreLabel.Content = blackjack.MoneyScore;
             // animate arrow
@@ -53,6 +58,14 @@ namespace Blackjack
         private void loseState()
         {
             Console.WriteLine("Player lost.");
+
+            HiddenDealerCard.Fill = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/Cards/" + blackjack.DealerHand.PlayingCards[0].Rank + "_of_" + blackjack.DealerHand.PlayingCards[0].Suit + ".png"))
+            };
+
+            blackjack.RoundLose();
+            ScoreLabel.Content = blackjack.MoneyScore;
         }
 
         private void raiseBetButtonClick(object sender, RoutedEventArgs e)
@@ -139,18 +152,29 @@ namespace Blackjack
                         break;
                     if (blackjack.DealerHand.CardScore > 21)
                     {
-                        winState();
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            winState();
+                        });
                         return;
                     }
                 }
 
                 if (blackjack.DealerHand.CardScore > blackjack.PlayerHand.CardScore)
                 {
-                    loseState();
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        loseState();
+                    });
+                    
                 }
                 else
                 {
-                    winState();
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        winState();
+                    });
+                    
                 }
             }));
 
@@ -197,6 +221,8 @@ namespace Blackjack
 
             if (blackjack.DealerHand.CardScore == 21)
                 loseState();
+            else if (blackjack.PlayerHand.CardScore == 21)
+                winState();
         }
 
         private void addPlayerCard(Card card, int posLeft, int posTop)
