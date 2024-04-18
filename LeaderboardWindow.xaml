@@ -42,6 +42,6 @@
             
         </DataGrid>
 
-        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource PanelButton}" Content="Back"/>
+        <Button x:Name="BackButton" Grid.Row="3" Grid.Column="1" Style="{StaticResource PanelButton}" Content="Back" Click="BackButton_Click"/>
     </Grid>
 </Window>

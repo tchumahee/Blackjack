@@ -238,6 +238,10 @@ namespace Blackjack
         private void SaveScoreButtonClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Save score clicked.");
+
+            AddScoreWindow addScoreWindow = new AddScoreWindow();
+            addScoreWindow.Owner = this;
+            addScoreWindow.Show();
         }
 
         private void addButton(string name, string content, RoutedEventHandler btnClick)
