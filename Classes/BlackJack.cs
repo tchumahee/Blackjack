@@ -150,6 +150,12 @@ namespace Blackjack.Classes
                     }
                     else
                     {
+                        if(dealerHand.CardScore < playerHand.CardScore)
+                        {
+                            Card addedCard = dealerHand.AddPlayingCard(nextCard);
+                            DrawCard(HandType.Dealer);
+                            return addedCard;
+                        }
                         // very small chance of drawing (for now, doesn't draw)
                         return null;
                     }
