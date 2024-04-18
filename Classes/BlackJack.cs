@@ -36,6 +36,12 @@ namespace Blackjack.Classes
         public BlackJack(int numDecks, int moneyScore)
         {
             ShuffleDeck(numDecks);
+
+            foreach (Card card in cardDeck.PlayingCards)
+            {
+                Console.WriteLine(card);
+            }
+
             this.moneyScore = moneyScore;
             this.betAmount = 5;
         }
@@ -138,7 +144,7 @@ namespace Blackjack.Classes
                 {
                     if (dealerHand.CardScore <= 15)
                     {
-                        if (dealerHand.CardScore > playerHand.CardScore)
+                        if (dealerHand.CardScore >= playerHand.CardScore)
                             return null;
                         Card addedCard = dealerHand.AddPlayingCard(nextCard);
                         nextCard = cardDeck.DrawCard();
@@ -146,7 +152,7 @@ namespace Blackjack.Classes
                     }
                     else if (dealerHand.CardScore <= 16)
                     {
-                        if (dealerHand.CardScore > playerHand.CardScore)
+                        if (dealerHand.CardScore >= playerHand.CardScore)
                             return null;
                         Card addedCard = dealerHand.AddPlayingCard(nextCard);
                         DrawCard(HandType.Dealer);

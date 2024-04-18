@@ -21,7 +21,7 @@ namespace Blackjack
     /// </summary>
     public partial class MainWindow : Window
     {
-        const int numDecks = 1;
+        const int numDecks = 2;
         const int startingScore = 100;
         const int startingBet = 5;
 
@@ -40,10 +40,52 @@ namespace Blackjack
 
         Rectangle HiddenDealerCard;
 
+        private void gameOver()
+        {
+
+        }
+
+        private void endRound()
+        {
+            System.Threading.Thread roundEndThread = new System.Threading.Thread(new System.Threading.ThreadStart(
+                () =>
+                {
+                    System.Threading.Thread.Sleep(2000);
+
+                    if (blackjack.MoneyScore == 0)
+                    {
+                        gameOver();
+                        return;
+                    }
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        DealerCardsCanvas.Children.Clear();
+                        PlayerCardsCanvas.Children.Clear();
+
+                        Arrow.Fill = null;
+
+                        playerCardDirection = 1;
+                        dealerCardDirection = 1;
+
+                        initializeBetButtons();
+                    });
+                }));
+
+            roundEndThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            roundEndThread.IsBackground = true;
+            roundEndThread.Start();
+
+        }
 
         private void winState()
         {
             Console.WriteLine("Player won.");
+
+            Arrow.Fill = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/ArrowUp.png"))
+            };
 
             HiddenDealerCard.Fill = new ImageBrush
             {
@@ -52,12 +94,19 @@ namespace Blackjack
 
             blackjack.RoundWin();
             ScoreLabel.Content = blackjack.MoneyScore;
+
+            endRound();
             // animate arrow
         }
 
         private void loseState()
         {
             Console.WriteLine("Player lost.");
+
+            Arrow.Fill = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/ArrowDown.png"))
+            };
 
             HiddenDealerCard.Fill = new ImageBrush
             {
@@ -66,6 +115,8 @@ namespace Blackjack
 
             blackjack.RoundLose();
             ScoreLabel.Content = blackjack.MoneyScore;
+
+            endRound();
         }
 
         private void raiseBetButtonClick(object sender, RoutedEventArgs e)
@@ -138,7 +189,7 @@ namespace Blackjack
 
                 while (true)
                 {
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(1500);
                     Card newCard = blackjack.DealerDraw();
                     if (newCard != null)
                     {
@@ -160,7 +211,7 @@ namespace Blackjack
                     }
                 }
 
-                if (blackjack.DealerHand.CardScore > blackjack.PlayerHand.CardScore)
+                if (blackjack.DealerHand.CardScore >= blackjack.PlayerHand.CardScore)
                 {
                     this.Dispatcher.Invoke(() =>
                     {
@@ -217,6 +268,7 @@ namespace Blackjack
             addButton("StayButton", "Stay [S]", StayButtonClick);
             addButton("SaveButton", "Save score", SaveScoreButtonClick);
 
+            blackjack.StartGame();
             initializeCards();
 
             if (blackjack.DealerHand.CardScore == 21)
@@ -298,10 +350,9 @@ namespace Blackjack
 
 
             blackjack = new BlackJack(numDecks, startingScore);
+
             ScoreLabel.Content = blackjack.MoneyScore;
             CurrentBetLabel.Content = bet;
-
-            blackjack.StartGame();
 
             initializeBetButtons();
         }

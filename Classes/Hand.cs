@@ -10,13 +10,16 @@ namespace Blackjack.Classes
     class Hand
     {
         private List<Card> playingCards = new List<Card>();
-        private int cardScore;
+        private int cardScore = 0;
 
         public List<Card> PlayingCards { get => playingCards; }
         public int CardScore { get => cardScore; }
 
         public Card AddPlayingCard(Card card)
         {
+            if (card == null)
+                return null;
+
             if (cardScore < 21)
             {
                 playingCards.Add(card);
@@ -53,6 +56,7 @@ namespace Blackjack.Classes
         public void ClearHand()
         {
             playingCards.Clear();
+            cardScore = 0;
         }
     }
 }

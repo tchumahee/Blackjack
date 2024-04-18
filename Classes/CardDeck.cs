@@ -37,7 +37,7 @@ namespace Blackjack.Classes
 
         public Card DrawCard()
         {
-            if (index < cardsLeft)
+            if (index < playingCards.Length)
             {
                 cardsLeft--;
                 return playingCards[index++];

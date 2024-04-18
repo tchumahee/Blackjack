@@ -83,5 +83,9 @@
             </StackPanel>
         </DockPanel>
 
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Rectangle x:Name="Arrow" Height="120" Width="100"></Rectangle>
+        </StackPanel>
+        
     </Grid>
 </Window>
