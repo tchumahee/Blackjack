@@ -25,6 +25,8 @@ namespace Blackjack
         const int startingScore = 100;
         const int startingBet = 5;
 
+        int bet = startingBet;
+
 
         BlackJack blackjack;
 
@@ -33,17 +35,34 @@ namespace Blackjack
         int playerHandLeft;
         int dealerHandTop;
         int dealerHandLeft;
-        int cardDirection = 1;
+        int playerCardDirection = 1;
+        int dealerCardDirection = 1;
 
+        Rectangle HiddenDealerCard;
+
+
+        private void winState()
+        {
+            Console.WriteLine("Player won.");
+
+            blackjack.RoundWin();
+            ScoreLabel.Content = blackjack.MoneyScore;
+            // animate arrow
+        }
+
+        private void loseState()
+        {
+            Console.WriteLine("Player lost.");
+        }
 
         private void raiseBetButtonClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Raise bet clicked.");
 
-            if(blackjack.BetAmount + 10 <= blackjack.MoneyScore)
+            if (bet + 10 <= blackjack.MoneyScore)
             {
-                blackjack.BetAmount += 10;
-                CurrentBetLabel.Content = blackjack.BetAmount;
+                bet += 10;
+                CurrentBetLabel.Content = bet;
             }
         }
 
@@ -51,16 +70,18 @@ namespace Blackjack
         {
             Console.WriteLine("Lower bet clicked.");
 
-            if (blackjack.BetAmount - 10 > 0)
+            if (bet - 10 > 0)
             {
-                blackjack.BetAmount -= 10;
-                CurrentBetLabel.Content = blackjack.BetAmount;
+                bet -= 10;
+                CurrentBetLabel.Content = bet;
             }
         }
 
         private void confirmBetButtonClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Confirm bet clicked.");
+
+            blackjack.PlaceBet(bet);
 
             initializeGameStart();
         }
@@ -72,11 +93,16 @@ namespace Blackjack
             Card newCard = blackjack.Hit();
 
             if (newCard != null)
-                addPlayerCard(newCard, playerHandLeft += 38, playerHandTop += 14 * (cardDirection *= -1));
+                addPlayerCard(newCard, playerHandLeft += 38, playerHandTop += 14 * (playerCardDirection *= -1));
 
             if (blackjack.PlayerHand.CardScore > 21)
             {
-                Console.WriteLine("Player lost.");
+                loseState();
+                return;
+            }
+            else if (blackjack.PlayerHand.CardScore == 21)
+            {
+                winState();
                 return;
             }
         }
@@ -84,6 +110,54 @@ namespace Blackjack
         private void StayButtonClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Stay clicked.");
+
+            blackjack.Stay();
+
+            HiddenDealerCard.Fill = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/Cards/" + blackjack.DealerHand.PlayingCards[0].Rank + "_of_" + blackjack.DealerHand.PlayingCards[0].Suit + ".png"))
+            };
+
+            System.Threading.Thread dealerThread = new System.Threading.Thread(new System.Threading.ThreadStart(
+                () =>
+            {
+                System.Threading.Thread.CurrentThread.IsBackground = true;
+
+                while (true)
+                {
+                    System.Threading.Thread.Sleep(500);
+                    Card newCard = blackjack.DealerDraw();
+                    if (newCard != null)
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            addDealerCard(newCard, dealerHandLeft += 24, dealerHandTop += 8 * (dealerCardDirection *= -1), false);
+                        });
+                    }
+                        
+                    else
+                        break;
+                    if (blackjack.DealerHand.CardScore > 21)
+                    {
+                        winState();
+                        return;
+                    }
+                }
+
+                if (blackjack.DealerHand.CardScore > blackjack.PlayerHand.CardScore)
+                {
+                    loseState();
+                }
+                else
+                {
+                    winState();
+                }
+            }));
+
+            dealerThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            dealerThread.IsBackground = true;
+            dealerThread.Start();
+
         }
 
         private void SaveScoreButtonClick(object sender, RoutedEventArgs e)
@@ -120,6 +194,9 @@ namespace Blackjack
             addButton("SaveButton", "Save score", SaveScoreButtonClick);
 
             initializeCards();
+
+            if (blackjack.DealerHand.CardScore == 21)
+                loseState();
         }
 
         private void addPlayerCard(Card card, int posLeft, int posTop)
@@ -143,8 +220,12 @@ namespace Blackjack
                 Width = 80,
                 Height = 112
             };
-            if(firstCard)
+            if (firstCard)
+            {
                 rectangle.Style = (Style)Application.Current.FindResource("PlayingCardBack");
+                rectangle.Name = "HiddenDealerCard";
+                HiddenDealerCard = rectangle;
+            }
             else
             {
                 rectangle.Style = (Style)Application.Current.FindResource("PlayingCard");
@@ -153,31 +234,34 @@ namespace Blackjack
                     ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/Cards/" + card.Rank + "_of_" + card.Suit + ".png"))
                 };
             }
-                
+
             Canvas.SetLeft(rectangle, posLeft);
             Canvas.SetTop(rectangle, posTop);
-            
 
-            DealerCardsCanvas.Children.Add(rectangle);
+            this.Dispatcher.Invoke(() =>
+            {
+                DealerCardsCanvas.Children.Add(rectangle);
+            });
+            
         }
 
         private void initializeCards()
         {
             playerHandTop = (int)Canvas.GetTop(PlayerCardRef) + 14;
             playerHandLeft = (int)Canvas.GetLeft(PlayerCardRef) - 38;
-            dealerHandTop = (int)Canvas.GetTop(DealerCardRef) - 8;
+            dealerHandTop = (int)Canvas.GetTop(DealerCardRef) + 8;
             dealerHandLeft = (int)Canvas.GetLeft(DealerCardRef) - 24;
 
             foreach (Card card in blackjack.PlayerHand.PlayingCards)
             {
-                addPlayerCard(card, playerHandLeft += 38, playerHandTop += 14 * (cardDirection *= -1));
+                addPlayerCard(card, playerHandLeft += 38, playerHandTop += 14 * (playerCardDirection *= -1));
             }
 
 
             bool firstCard = true;
             foreach (Card card in blackjack.DealerHand.PlayingCards)
             {
-                addDealerCard(card, dealerHandLeft += 24, dealerHandTop += 8, firstCard);
+                addDealerCard(card, dealerHandLeft += 24, dealerHandTop += 8 * (playerCardDirection *= -1), firstCard);
                 firstCard = false;
             }
         }
@@ -189,7 +273,7 @@ namespace Blackjack
 
             blackjack = new BlackJack(numDecks, startingScore);
             ScoreLabel.Content = blackjack.MoneyScore;
-            CurrentBetLabel.Content = blackjack.BetAmount;
+            CurrentBetLabel.Content = bet;
 
             blackjack.StartGame();
 

@@ -25,14 +25,6 @@ namespace Blackjack.Classes
         // hit and stay implemented here
         // dealer logic implemented here
 
-        public int BetAmount
-        {
-            get => betAmount;
-            set
-            {
-                betAmount = value <= moneyScore ? value : betAmount;
-            }
-        }
         public int DealerHandScore { get => dealerHand.CardScore; }
         public int MoneyScore { get => moneyScore; }
 
@@ -136,30 +128,33 @@ namespace Blackjack.Classes
             }
         }
 
-        public bool DealerDraw()
+        public Card DealerDraw()
         {
             if (stayChosen)
             {
+                if (dealerHand.CardScore > playerHand.CardScore)
+                    return null;
                 if (nextCard != null)
                 {
                     if (dealerHand.CardScore <= 15)
                     {
-                        dealerHand.AddPlayingCard(nextCard);
+                        Card addedCard = dealerHand.AddPlayingCard(nextCard);
                         nextCard = cardDeck.DrawCard();
-                        return true;
+                        return addedCard;
                     }
                     else if (dealerHand.CardScore <= 16)
                     {
+                        Card addedCard = dealerHand.AddPlayingCard(nextCard);
                         DrawCard(HandType.Dealer);
-                        return true;               // until implemented, always draws
+                        return addedCard;               // until implemented, always draws
                     }
                     else
                     {
                         // very small chance of drawing (for now, doesn't draw)
-                        return false;
+                        return null;
                     }
                 }
-                return false;
+                return null;
             }
             else
                 throw new StayNotSelectedException();

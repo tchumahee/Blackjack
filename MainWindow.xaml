@@ -36,18 +36,24 @@
                    Height="{Binding ActualHeight, ElementName=row2}"
                    Width="{Binding ActualWidth, ElementName=row2}" Style="{StaticResource PlayArea}"></Rectangle>
 
+        <Canvas x:Name="PlayerCardsRefCanvas" Grid.Row="1" Grid.Column="1">
+            <Rectangle x:Name="PlayerCardRef" Style="{StaticResource PlayingCardBack}" Canvas.Left="79" Canvas.Top="65"></Rectangle>
+            <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="117" Canvas.Top="79" RenderTransformOrigin="1.833,0.693"/>
+        </Canvas>
+
         <Canvas x:Name="PlayerCardsCanvas" Grid.Row="1" Grid.Column="1">
-            <Rectangle x:Name="PlayerCardRef" Style="{StaticResource PlayingCard}" Canvas.Left="79" Canvas.Top="65"></Rectangle>
-            <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="117" Canvas.Top="79" RenderTransformOrigin="1.833,0.693"/>
         </Canvas>
 
         <StackPanel x:Name="cell2" Grid.Row="0" Grid.Column="2">
             <Label Content="Dealer" Height="38" Canvas.Left="333" Canvas.Top="33" Width="78" Style="{StaticResource GameText}"/>
-            <Canvas x:Name="DealerCardsCanvas" Height="200" >
-                <Rectangle x:Name="DealerCardRef" Style="{StaticResource PlayingCard}" Canvas.Left="66" Canvas.Top="9" Height="112" Width="80"/>
-                <Rectangle Style="{StaticResource PlayingCard}" Canvas.Left="90" Canvas.Top="18" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
+            <Canvas x:Name="DealerCardsRefCanvas" Height="200" >
+                <Rectangle x:Name="DealerCardRef" Style="{StaticResource PlayingCardBack}" Canvas.Left="66" Canvas.Top="9" Height="112" Width="80"/>
+                <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="90" Canvas.Top="18" RenderTransformOrigin="1.833,0.693" Height="112" Width="80"/>
             </Canvas>
         </StackPanel>
+
+        <Canvas x:Name="DealerCardsCanvas" Height="200" Grid.Column="2" Grid.Row="0" Margin="0,38,0,286" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        </Canvas>
 
         <DockPanel Grid.Row="1" Grid.Column="3" MaxHeight="320">
             <Grid Width="250" Height="100" DockPanel.Dock="Top">
