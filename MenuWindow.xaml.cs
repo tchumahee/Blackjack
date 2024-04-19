@@ -29,6 +29,7 @@ namespace Blackjack
             MainWindow mainWindow = new MainWindow();
             Visibility = Visibility.Hidden;
             mainWindow.Owner = this;
+            mainWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             mainWindow.Show();
         }
 
@@ -42,6 +43,7 @@ namespace Blackjack
             LeaderboardWindow leaderboardWindow = new LeaderboardWindow();
             Visibility = Visibility.Hidden;
             leaderboardWindow.Owner = this;
+            leaderboardWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             leaderboardWindow.Show();
         }
     }

@@ -15,22 +15,23 @@ using System.Windows.Shapes;
 namespace Blackjack
 {
     /// <summary>
-    /// Interaction logic for AddScoreWindow.xaml
+    /// Interaction logic for ExitGameConfirmation.xaml
     /// </summary>
-    public partial class AddScoreWindow : Window
+    public partial class ExitGameConfirmation : Window
     {
-        Action<string> callback;
+        Action callback;
 
-        public AddScoreWindow(Action<string> callback)
+        public ExitGameConfirmation(Action callback)
         {
             InitializeComponent();
 
             this.callback = callback;
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void ConfirmBackButton_Click(object sender, RoutedEventArgs e)
         {
-            callback(NameTextBox.Text);
+            callback();
+            this.Close();
         }
     }
 }

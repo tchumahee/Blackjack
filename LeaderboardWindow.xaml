@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blackjack"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
         Title="Blackjack" Height="580.5" Width="1005.5">
     <Window.Background>
         <ImageBrush ImageSource="Assets/Images/MenuBackground.png"/>
@@ -37,7 +38,7 @@
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="NameColumn" Header="Name" Binding="{Binding Path=Username}" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="ScoreColumn" Header="Score" Binding="{Binding Path=Score}"  SortDirection="Descending"/>
+                <DataGridTextColumn x:Name="ScoreColumn" Header="Score" Binding="{Binding Path=Score}"/>
             </DataGrid.Columns>
             
         </DataGrid>

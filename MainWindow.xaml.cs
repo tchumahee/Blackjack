@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Blackjack.Classes;
+using System.IO;
 
 namespace Blackjack
 {
@@ -42,7 +43,27 @@ namespace Blackjack
 
         private void gameOver()
         {
+            System.Threading.Thread gameOverThread = new System.Threading.Thread(new System.Threading.ThreadStart(
+                () =>
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        GameOverLabel.Content = "Game\nOver";
+                    });
 
+                    System.Threading.Thread.Sleep(2000);
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        this.Close();
+                    });
+
+                    
+                }));
+
+            gameOverThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            gameOverThread.IsBackground = true;
+            gameOverThread.Start();
         }
 
         private void endRound()
@@ -52,7 +73,7 @@ namespace Blackjack
                 {
                     System.Threading.Thread.Sleep(2000);
 
-                    if (blackjack.MoneyScore == 0)
+                    if (blackjack.MoneyScore <= 0)
                     {
                         gameOver();
                         return;
@@ -69,6 +90,12 @@ namespace Blackjack
                         dealerCardDirection = 1;
 
                         initializeBetButtons();
+
+                        if (bet > blackjack.MoneyScore)
+                        {
+                            bet = blackjack.MoneyScore;
+                            CurrentBetLabel.Content = bet;
+                        }
                     });
                 }));
 
@@ -171,6 +198,14 @@ namespace Blackjack
             }
         }
 
+
+        private void BackButtonClick(object sender, RoutedEventArgs e)
+        {
+            ExitGameConfirmation exitGameConfirmation = new ExitGameConfirmation(this.Close);
+            exitGameConfirmation.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            exitGameConfirmation.Show();
+        }
+
         private void StayButtonClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Stay clicked.");
@@ -235,12 +270,31 @@ namespace Blackjack
 
         }
 
+        private void saveScore(string name)
+        {
+            string filePath = System.IO.Path.Combine(Environment.CurrentDirectory, "leaderboard.csv");
+
+            if (File.Exists(filePath))
+            {
+                using (StreamWriter w = File.AppendText(filePath))
+                {
+                    w.WriteLine($"{name},{blackjack.MoneyScore}");
+                }
+
+            }
+            else
+                Console.WriteLine("Error reading file");
+
+            this.Close();
+        }
+
         private void SaveScoreButtonClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Save score clicked.");
 
-            AddScoreWindow addScoreWindow = new AddScoreWindow();
+            AddScoreWindow addScoreWindow = new AddScoreWindow(saveScore);
             addScoreWindow.Owner = this;
+            addScoreWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             addScoreWindow.Show();
         }
 
@@ -260,19 +314,28 @@ namespace Blackjack
         private void initializeBetButtons()
         {
             ButtonsPanel.Children.Clear();
-            addButton("RaiseBetButton", "Raise bet [E]", raiseBetButtonClick);
-            addButton("LowerBetButton", "Lower bet [Q]", lowerBetButtonClick);
-            addButton("ConfirmBetButton", "Deal [W]", confirmBetButtonClick);
+            addButton("RaiseBetButton", "Raise bet", raiseBetButtonClick);
+            addButton("LowerBetButton", "Lower bet", lowerBetButtonClick);
+            addButton("ConfirmBetButton", "Deal", confirmBetButtonClick);
+            addButton("SaveButton", "Save score", SaveScoreButtonClick);
+            addButton("BackButton", "Back to menu", BackButtonClick);
         }
 
         private void initializeGameStart()
         {
             ButtonsPanel.Children.Clear();
-            addButton("HitButton", "Hit [E]", HitButtonClick);
-            addButton("StayButton", "Stay [S]", StayButtonClick);
+            addButton("HitButton", "Hit", HitButtonClick);
+            addButton("StayButton", "Stay", StayButtonClick);
             addButton("SaveButton", "Save score", SaveScoreButtonClick);
+            addButton("BackButton", "Back to menu", BackButtonClick);
 
-            blackjack.StartGame();
+
+            bool endOfDeck = blackjack.StartGame();
+            if (!endOfDeck)
+            {
+                blackjack.ShuffleDeck(1);
+                blackjack.StartGame();
+            }
             initializeCards();
 
             if (blackjack.DealerHand.CardScore == 21)
@@ -359,6 +422,11 @@ namespace Blackjack
             CurrentBetLabel.Content = bet;
 
             initializeBetButtons();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Owner.Visibility = Visibility.Visible;
         }
     }
 }

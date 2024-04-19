@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blackjack"
         mc:Ignorable="d"
-        Title="Blackjack" Height="580.5" Width="1005.5">
+        ResizeMode="CanMinimize"
+        Title="Blackjack" Height="580.5" Width="1005.5" Closing="Window_Closing">
 
     <Grid x:Name="Grid">
         <Grid.Background>
@@ -41,6 +42,26 @@
                    Height="{Binding ActualHeight, ElementName=row2}"
                    Width="{Binding ActualWidth, ElementName=row2}" Style="{StaticResource PlayArea}"></Rectangle>
 
+        <Grid Width="250" Height="80" DockPanel.Dock="Top" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Content="Current bet:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="248" Style="{StaticResource GameText}"/>
+            <Label HorizontalAlignment="Right"  Grid.Row="2" Grid.Column="0" Content="Score:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="279" Style="{StaticResource GameText}"/>
+
+            <Label x:Name="CurrentBetLabel" Grid.Row="1" Grid.Column="1" Content="50" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="248" Width="186" Style="{StaticResource GameTextVar}"/>
+            <Label x:Name="ScoreLabel" Grid.Row="2" Grid.Column="2" Content="23450" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="279" Width="186" Style="{StaticResource GameTextVar}"/>
+
+        </Grid>
+
         <Canvas x:Name="PlayerCardsRefCanvas" Grid.Row="1" Grid.Column="1">
             <Rectangle x:Name="PlayerCardRef" Style="{StaticResource PlayingCardBack}" Canvas.Left="79" Canvas.Top="65"></Rectangle>
             <Rectangle Style="{StaticResource PlayingCardBack}" Canvas.Left="117" Canvas.Top="79" RenderTransformOrigin="1.833,0.693"/>
@@ -61,25 +82,7 @@
         </Canvas>
 
         <DockPanel Grid.Row="1" Grid.Column="3" MaxHeight="320">
-            <Grid Width="250" Height="100" DockPanel.Dock="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Content="Current bet:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="248" Style="{StaticResource GameText}"/>
-                <Label HorizontalAlignment="Right"  Grid.Row="2" Grid.Column="0" Content="Score:" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="279" Style="{StaticResource GameText}"/>
-
-                <Label x:Name="CurrentBetLabel" Grid.Row="1" Grid.Column="1" Content="50" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="248" Width="186" Style="{StaticResource GameTextVar}"/>
-                <Label x:Name="ScoreLabel" Grid.Row="2" Grid.Column="2" Content="23450" Height="38" Foreground="Black" Canvas.Left="718" Canvas.Top="279" Width="186" Style="{StaticResource GameTextVar}"/>
-
-            </Grid>
+            
             <StackPanel x:Name="ButtonsPanel" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center">
 
                 <!--<Button x:Name="btn1" Content="Hit [E]" Style="{StaticResource PanelButton}"/>
@@ -91,6 +94,14 @@
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Rectangle x:Name="Arrow" Height="120" Width="100"></Rectangle>
         </StackPanel>
-        
+
+        <Label x:Name="GameOverLabel" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="150"
+               FontSize="60" FontFamily="Calibri" FontWeight="Bold" MaxWidth="200"
+               >
+            <Label.Content>
+                <AccessText TextWrapping="Wrap" Text=""/>
+            </Label.Content>
+        </Label>
+
     </Grid>
 </Window>
