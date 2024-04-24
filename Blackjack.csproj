@@ -55,10 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddScoreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExitGameConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeaderboardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AddScoreWindow.xaml.cs">
+      <DependentUpon>AddScoreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -66,18 +81,32 @@
     <Compile Include="Classes\CardDeck.cs" />
     <Compile Include="Classes\Dealer.cs" />
     <Compile Include="Classes\Exceptions\StayNotSelectedException.cs" />
-    <Compile Include="Classes\Game.cs" />
+    <Compile Include="Classes\BlackJack.cs" />
     <Compile Include="Classes\Hand.cs" />
     <Compile Include="Classes\HelperClasses\Rank.cs" />
     <Compile Include="Classes\HelperClasses\Suit.cs" />
     <Compile Include="Classes\Player.cs" />
-    <Compile Include="Classes\PlayingCard.cs" />
+    <Compile Include="Classes\Card.cs" />
+    <Compile Include="Classes\UserScore.cs" />
+    <Compile Include="ExitGameConfirmation.xaml.cs">
+      <DependentUpon>ExitGameConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeaderboardWindow.xaml.cs">
+      <DependentUpon>LeaderboardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MenuWindow.xaml.cs">
+      <DependentUpon>MenuWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,6 +124,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="leaderboard.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,6 +134,70 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="f\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\ArrowDown.png" />
+    <Resource Include="Assets\Images\ArrowUp.png" />
+    <Resource Include="Assets\Images\CardBack.png" />
+    <Resource Include="Assets\Images\CardFront.png" />
+    <Resource Include="Assets\Images\Cards\Ace_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Ace_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Ace_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Ace_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Eight_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Eight_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Eight_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Eight_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Five_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Five_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Five_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Five_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Four_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Four_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Four_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Four_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Jack_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Jack_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Jack_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Jack_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\King_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\King_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\King_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\King_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Nine_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Nine_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Nine_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Nine_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Queen_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Queen_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Queen_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Queen_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Seven_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Seven_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Seven_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Seven_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Six_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Six_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Six_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Six_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Ten_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Ten_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Ten_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Ten_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Three_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Three_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Three_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Three_of_Spades.png" />
+    <Resource Include="Assets\Images\Cards\Two_of_Clubs.png" />
+    <Resource Include="Assets\Images\Cards\Two_of_Diamonds.png" />
+    <Resource Include="Assets\Images\Cards\Two_of_Hearts.png" />
+    <Resource Include="Assets\Images\Cards\Two_of_Spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\MenuBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
